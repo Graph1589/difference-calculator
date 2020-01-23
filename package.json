@@ -1,0 +1,28 @@
+{
+  "name": "gendiff",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "commander": "^4.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/node": "^7.8.3",
+    "@babel/preset-env": "^7.8.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Graph1589/frontend-project-lvl2.git"
+  },
+  "author": "Stanislav R",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Graph1589/frontend-project-lvl2/issues"
+  },
+  "homepage": "https://github.com/Graph1589/frontend-project-lvl2#readme"
+}
