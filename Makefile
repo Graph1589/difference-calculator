@@ -12,3 +12,6 @@ startlocal:
 
 start:
 	npx babel-node src/bin/gendiff.js ~/Projects/frontend-project-lvl2/before.json ~/Projects/frontend-project-lvl2/after.json
+
+lint:
+	npx eslint .
