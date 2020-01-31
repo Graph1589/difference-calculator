@@ -9,20 +9,20 @@ export default (firstData, secondData) => {
   const diff = keys.reduce((acc, current) => {
     if ((_.has(firstConfig, current) && _.has(secondConfig, current))
     && firstConfig[current] === secondConfig[current]) {
-      return `${acc}   ${current}: ${firstConfig[current]}\n`;
+      return [`${acc}   ${current}: ${firstConfig[current]}\n`];
     }
     if ((_.has(firstConfig, current) && _.has(secondConfig, current))
     && firstConfig[current] !== secondConfig[current]) {
-      return `${acc} - ${current}: ${firstConfig[current]}\n${acc} + ${current}: ${secondConfig[current]}\n`;
+      return [`${acc} - ${current}: ${firstConfig[current]}\n${acc} + ${current}: ${secondConfig[current]}\n`];
     }
     if (_.has(firstConfig, current) && !_.has(secondConfig, current)) {
-      return `${acc} - ${current}: ${firstConfig[current]}\n`;
+      return [`${acc} - ${current}: ${firstConfig[current]}\n`];
     }
     if (!_.has(firstConfig, current) && _.has(secondConfig, current)) {
-      return `${acc} + ${current}: ${secondConfig[current]}\n`;
+      return [`${acc} + ${current}: ${secondConfig[current]}\n`];
     }
     return undefined;
-  }, '');
-  const result = `{\n${diff}}`;
+  }, []);
+  const result = `{\n${diff.join('\n')}}`;
   return result;
 };
