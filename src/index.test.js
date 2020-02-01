@@ -1,7 +1,13 @@
+import path from 'path';
 import genDiff from '.';
 
-const firstConfig = './fixtures/before.json';
-const secondConfig = './fixtures/after.json';
+const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+
+const firstJsonConfig = getFixturePath('before.json');
+const secondJsonConfig = getFixturePath('after.json');
+
+const firstYamlConfig = getFixturePath('before.yaml');
+const secondYamlConfig = getFixturePath('after.yaml');
 
 const result = `{
  - follow: false
@@ -11,6 +17,9 @@ const result = `{
    verbose: true
 }`;
 
-test('config files compare results', () => {
-  expect(genDiff(firstConfig, secondConfig)).toBe(result);
+test('JSON config files compare', () => {
+  expect(genDiff(firstJsonConfig, secondJsonConfig)).toBe(result);
+});
+test('YAML config files compare', () => {
+  expect(genDiff(firstYamlConfig, secondYamlConfig)).toBe(result);
 });
