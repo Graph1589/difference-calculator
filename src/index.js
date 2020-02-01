@@ -1,10 +1,8 @@
 import _ from 'lodash';
+import parser from './parsers';
 
-const fs = require('fs');
-
-export default (firstData, secondData) => {
-  const firstConfig = JSON.parse(fs.readFileSync(firstData));
-  const secondConfig = JSON.parse(fs.readFileSync(secondData));
+export default (firstPath, secondPath) => {
+  const [firstConfig, secondConfig] = parser(firstPath, secondPath);
   const keys = Object.keys(Object.assign(firstConfig, secondConfig)).sort();
   const diff = keys.reduce((acc, current) => {
     if ((_.has(firstConfig, current) && _.has(secondConfig, current))

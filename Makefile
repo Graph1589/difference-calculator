@@ -7,11 +7,8 @@ publish:
 lint:
 	npx eslint .
 
-startlocal:
-	npx babel-node src/bin/gendiff.js ./before.json ./after.json
+yaml:
+	npx babel-node src/bin/gendiff.js ./__fixtures__/before.yaml ./__fixtures__/after.yaml
 
-start:
+json:
 	npx babel-node src/bin/gendiff.js ~/Projects/frontend-project-lvl2/before.json ~/Projects/frontend-project-lvl2/after.json
-
-lint:
-	npx eslint .

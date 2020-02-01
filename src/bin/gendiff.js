@@ -12,7 +12,7 @@ program
   .action((firstData, secondData) => {
     const result = genDiff(firstData, secondData);
     console.log(result);
-    console.log(typeof result);
+    // console.log(typeof result);
   });
 program.parse(process.argv);
 
