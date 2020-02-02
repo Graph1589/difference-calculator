@@ -9,6 +9,9 @@ const secondJsonConfig = getFixturePath('after.json');
 const firstYamlConfig = getFixturePath('before.yaml');
 const secondYamlConfig = getFixturePath('after.yaml');
 
+const firstIniConfig = getFixturePath('before.ini');
+const secondIniConfig = getFixturePath('after.ini');
+
 const result = `{
  - follow: false
    host: hexlet.io
@@ -17,9 +20,12 @@ const result = `{
    verbose: true
 }`;
 
-test('JSON config files compare', () => {
+test('json config files compare', () => {
   expect(genDiff(firstJsonConfig, secondJsonConfig)).toBe(result);
 });
-test('YAML config files compare', () => {
+test('yaml config files compare', () => {
   expect(genDiff(firstYamlConfig, secondYamlConfig)).toBe(result);
+});
+test('ini config files compare', () => {
+  expect(genDiff(firstIniConfig, secondIniConfig)).toBe(result);
 });

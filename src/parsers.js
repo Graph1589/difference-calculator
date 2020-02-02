@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import yaml from 'js-yaml';
+import ini from 'ini';
 
 export default (firstConfig, secondConfig) => {
   if (path.extname(firstConfig) !== path.extname(secondConfig)) {
@@ -16,6 +17,9 @@ export default (firstConfig, secondConfig) => {
     case '.yaml':
       return [yaml.safeLoad(fs.readFileSync(firstConfig)),
         yaml.safeLoad(fs.readFileSync(secondConfig))];
+    case '.ini':
+      return [ini.parse(fs.readFileSync(firstConfig, 'UTF-8')),
+        ini.parse(fs.readFileSync(secondConfig, 'UTF-8'))];
     default:
       return undefined;
   }

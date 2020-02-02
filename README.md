@@ -7,3 +7,6 @@
 
 ***YAML example***
 [![asciicast](https://asciinema.org/a/IR1fLzPSkNZrrgkGrqWQ8lo1Y.svg)](https://asciinema.org/a/IR1fLzPSkNZrrgkGrqWQ8lo1Y)
+
+***INI example***
+[![asciicast](https://asciinema.org/a/vb3dOGEGExcjGJkkBRsztqxXI.svg)](https://asciinema.org/a/vb3dOGEGExcjGJkkBRsztqxXI)
