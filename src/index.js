@@ -19,7 +19,7 @@ export default (firstPath, secondPath) => {
     if (!_.has(firstConfig, current) && _.has(secondConfig, current)) {
       return [`${acc} + ${current}: ${secondConfig[current]}\n`];
     }
-    return undefined;
+    return 0;
   }, []);
   const result = `{\n${diff.join('\n')}}`;
   return result;
