@@ -2,6 +2,8 @@
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a962ce284066c7b43ea6/test_coverage)](https://codeclimate.com/github/Graph1589/frontend-project-lvl2/test_coverage)
 
+[![Build Status](https://travis-ci.org/Graph1589/frontend-project-lvl2.svg?branch=master)](https://travis-ci.org/Graph1589/frontend-project-lvl2)
+
 ![Node.js CI](https://github.com/Graph1589/frontend-project-lvl2/workflows/Node.js%20CI/badge.svg)
 
 ***JSON example***
