@@ -15,3 +15,6 @@ json:
 
 ini:
 	npx babel-node src/bin/gendiff.js ./__fixtures__/before.ini ./__fixtures__/after.ini
+
+test:
+	npm run test
