@@ -13,6 +13,8 @@ export default (firstConfig, secondConfig) => {
 
   switch (format) {
     case '.json':
+      // console.log(JSON.parse(fs.readFileSync(firstConfig)));
+      // console.log(JSON.parse(fs.readFileSync(secondConfig)));
       return [JSON.parse(fs.readFileSync(firstConfig)), JSON.parse(fs.readFileSync(secondConfig))];
     case '.yaml':
       return [yaml.safeLoad(fs.readFileSync(firstConfig)),
