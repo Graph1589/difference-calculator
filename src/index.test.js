@@ -13,19 +13,46 @@ const firstIniConfig = getFixturePath('before.ini');
 const secondIniConfig = getFixturePath('after.ini');
 
 const result = `{
- - follow: false
-   host: hexlet.io
- - proxy: 123.234.53.22
-   timeout: 20
-   verbose: true
+    common: {
+      + follow: false
+        setting1: Value 1
+      - setting2: 200
+      - setting3: true
+      + setting3: {
+            key: value
+        }
+      + setting4: blah blah
+      + setting5: {
+            key5: value5
+        }
+        setting6: {
+            key: value
+          + ops: vops
+        }
+    }
+    group1: {
+      - baz: bas
+      + baz: bars
+        foo: bar
+      - nest: {
+            key: value
+        }
+      + nest: str
+    }
+  - group2: {
+        abc: 12345
+    }
+  + group3: {
+        fee: 100500
+    }
 }`;
 
-test('json config files compare', () => {
+test('json files compare', () => {
   expect(genDiff(firstJsonConfig, secondJsonConfig)).toBe(result);
 });
-test('yaml config files compare', () => {
+test('yaml files compare', () => {
   expect(genDiff(firstYamlConfig, secondYamlConfig)).toBe(result);
 });
-test('ini config files compare', () => {
+test('ini files compare', () => {
   expect(genDiff(firstIniConfig, secondIniConfig)).toBe(result);
 });
