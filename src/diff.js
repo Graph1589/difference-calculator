@@ -7,8 +7,10 @@ const statusCheck = (beforeValue, afterValue) => {
   if (afterValue === '' || afterValue === undefined) {
     return 'deleted';
   }
-  if (beforeValue === afterValue
-    || (beforeValue instanceof Object && afterValue instanceof Object)) {
+  if (beforeValue === afterValue) {
+    return 'unchanged';
+  }
+  if (beforeValue instanceof Object && afterValue instanceof Object) {
     return 'unchanged';
   }
   return 'edited';
