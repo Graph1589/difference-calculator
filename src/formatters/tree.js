@@ -9,7 +9,11 @@ const stringify = (value, depth) => {
   return `{${result.join('\n')}\n${' '.repeat(ind - 2)}}`;
 };
 
-
+const selector = {
+  unchanged: ' ',
+  added: '+',
+  deleted: '-',
+};
 
 const render = (data, depth = 0) => {
   const ind = depth * 4 + 2;
@@ -19,37 +23,13 @@ const render = (data, depth = 0) => {
     } = current;
     const value = type === 'key' ? stringify(beforeValue || afterValue, depth + 1) : render(children, depth + 1);
 
-    if (type === 'key') {
-      switch (status) {
-        case 'unchanged':
-          return `${' '.repeat(ind)}${' '} ${name}: ${value}`;
-        case 'added':
-          return `${' '.repeat(ind)}${'+'} ${name}: ${value}`;
-        case 'deleted':
-          return `${' '.repeat(ind)}${'-'} ${name}: ${value}`;
-        case 'edited':
-          return `${' '.repeat(ind)}${'-'} ${name}: ${stringify(beforeValue, depth + 1)}\n${' '.repeat(ind)}${'+'} ${name}: ${stringify(afterValue, depth + 1)}`;
-        default:
-          break;
-      }
+    if (type === 'key' && status === 'edited') {
+      return `${' '.repeat(ind)}${'-'} ${name}: ${stringify(beforeValue, depth + 1)}\n${' '.repeat(ind)}${'+'} ${name}: ${stringify(afterValue, depth + 1)}`;
     }
-
-    if (current.type === 'obj') {
-      switch (status) {
-        case 'unchanged':
-          return `${' '.repeat(ind)}${' '} ${name}: ${value}`;
-        case 'added':
-          return `${' '.repeat(ind)}${'+'} ${name}: ${value}`;
-        case 'deleted':
-          return `${' '.repeat(ind)}${'-'} ${name}: ${value}`;
-        case 'edited':
-          return `${' '.repeat(ind)}${'-'} ${name}: ${value}\n${' '.repeat(ind)}${'+'} ${name}: ${value}`;
-        default:
-          break;
-      }
-      return `\n${' '.repeat(ind)}${' '} ${name}: ${value}`;
+    if (type === 'obj' && status === 'edited') {
+      return `${' '.repeat(ind)}${'-'} ${name}: ${value}\n${' '.repeat(ind)}${'+'} ${name}: ${value}`;
     }
-    return 0;
+    return `\n${' '.repeat(ind)}${selector[status]} ${name}: ${value}`;
   });
   return `{\n${result.join('\n')}\n${' '.repeat(ind - 2)}}`;
 };
