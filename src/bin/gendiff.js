@@ -9,8 +9,8 @@ program
   .arguments('<firstConfig> <secondConfig>')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'output format')
-  .action((firstData, secondData) => {
-    const result = genDiff(firstData, secondData);
+  .action((firstPath, secondPath) => {
+    const result = genDiff(firstPath, secondPath);
     console.log(result);
     return result;
   });
