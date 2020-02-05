@@ -1,10 +1,10 @@
 import _ from 'lodash';
 
 const statusCheck = (beforeValue, afterValue) => {
-  if (beforeValue === '' || beforeValue === undefined) {
+  if (beforeValue === undefined) {
     return 'added';
   }
-  if (afterValue === '' || afterValue === undefined) {
+  if (afterValue === undefined) {
     return 'deleted';
   }
   if (beforeValue === afterValue) {
@@ -22,7 +22,7 @@ const genDiff = (firstConfig, secondConfig) => {
   return keys.map((current) => {
     if (firstConfig[current] instanceof Object && secondConfig[current] instanceof Object) {
       const beforeValue = firstConfig[current];
-      const afterValue = _.has(secondConfig, current) ? secondConfig[current] : '';
+      const afterValue = _.has(secondConfig, current) ? secondConfig[current] : undefined;
       const status = statusCheck(beforeValue, afterValue);
       const children = genDiff(firstConfig[current], secondConfig[current]);
       return {
@@ -34,8 +34,8 @@ const genDiff = (firstConfig, secondConfig) => {
         status,
       };
     }
-    const beforeValue = _.has(firstConfig, current) ? firstConfig[current] : '';
-    const afterValue = _.has(secondConfig, current) ? secondConfig[current] : '';
+    const beforeValue = _.has(firstConfig, current) ? firstConfig[current] : undefined;
+    const afterValue = _.has(secondConfig, current) ? secondConfig[current] : undefined;
     const status = statusCheck(beforeValue, afterValue);
     return {
       name: current,
