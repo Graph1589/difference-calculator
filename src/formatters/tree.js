@@ -9,7 +9,7 @@ const stringify = (value, depth) => {
   return `{${result.join('\n')}\n${' '.repeat(ind - 2)}}`;
 };
 
-const selector = {
+const selectSignByStatus = {
   unchanged: ' ',
   added: '+',
   deleted: '-',
@@ -29,7 +29,7 @@ const render = (data, depth = 0) => {
     if (type === 'obj' && status === 'edited') {
       return `${' '.repeat(ind)}${'-'} ${name}: ${value}\n${' '.repeat(ind)}${'+'} ${name}: ${value}`;
     }
-    return `${' '.repeat(ind)}${selector[status]} ${name}: ${value}`;
+    return `${' '.repeat(ind)}${selectSignByStatus[status]} ${name}: ${value}`;
   });
   return `{\n${result.join('\n')}\n${' '.repeat(ind - 2)}}`;
 };
