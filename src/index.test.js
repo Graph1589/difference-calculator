@@ -1,5 +1,4 @@
 import path from 'path';
-import fs from 'fs';
 import genDiff from '.';
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);

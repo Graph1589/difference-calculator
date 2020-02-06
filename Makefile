@@ -18,3 +18,6 @@ ini:
 
 test:
 	npm run test
+
+plain:
+	gendiff --format plain ./__fixtures__/before.json ./__fixtures__/after.json
