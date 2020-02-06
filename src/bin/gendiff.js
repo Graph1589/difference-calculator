@@ -10,10 +10,12 @@ program
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'output format')
   .action((firstPath, secondPath) => {
-    const result = genDiff(firstPath, secondPath);
+    const result = genDiff(firstPath, secondPath, program.format);
     console.log(result);
     return result;
   });
+
 program.parse(process.argv);
+
 
 export default genDiff;

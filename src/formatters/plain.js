@@ -5,22 +5,24 @@ const genPath = (path, name) => {
     return `${name}`;
   }
   return `${path}.${name}`;
-}
+};
 
 const render = (data, path = '') => {
   const result = data.map((current) => {
     const {
-      name, type, beforeValue, afterValue, children, status,
+      name, type, children, status,
     } = current;
-    let newPath = genPath(path, name);
+    const newPath = genPath(path, name);
     if (type === 'key') {
+      const beforeValue = current.beforeValue instanceof Object ? '[complex value]' : current.beforeValue;
+      const afterValue = current.afterValue instanceof Object ? '[complex value]' : current.afterValue;
       switch (status) {
         case 'deleted':
-          return `Property ${newPath} was deleted\n`;
+          return `Property '${newPath}' was deleted\n`;
         case 'added':
-          return `Property ${newPath} was added with value: ${afterValue}\n`;
+          return `Property '${newPath}' was added with value: ${afterValue}\n`;
         case 'edited':
-          return `Property ${newPath} was changed from ${beforeValue} to ${afterValue}\n`;
+          return `Property '${newPath}' was changed from ${beforeValue} to ${afterValue}\n`;
         default:
           break;
       }
@@ -28,13 +30,13 @@ const render = (data, path = '') => {
     if (type === 'obj') {
       switch (status) {
         case 'unchanged':
-          return render(children, path);
+          return render(children, newPath);
         case 'deleted':
-          return `Property ${newPath} was deleted\n`;
+          return `Property '${newPath}' was deleted\n`;
         case 'added':
-          return `Property ${newPath} was added with value: ${afterValue}\n`;
+          return `Property '${newPath}' was added with value: ${current.afterValue}\n`;
         case 'edited':
-          return `Property ${newPath} was changed from ${beforeValue} to ${afterValue}\n`;
+          return `Property '${newPath}' was changed from ${current.beforeValue} to ${current.afterValue}\n`;
         default:
           break;
       }
