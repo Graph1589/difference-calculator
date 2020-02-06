@@ -1,7 +1,9 @@
 import path from 'path';
+import fs from 'fs';
 import genDiff from '.';
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+const plainResult = fs.readFileSync(getFixturePath('plainesult'));
 
 const firstJsonConfig = getFixturePath('before.json');
 const secondJsonConfig = getFixturePath('after.json');
@@ -46,7 +48,7 @@ const result = `{
         fee: 100500
     }
 }`;
-
+/*
 test('json files compare', () => {
   expect(genDiff(firstJsonConfig, secondJsonConfig)).toBe(result);
 });
@@ -55,4 +57,7 @@ test('yaml files compare', () => {
 });
 test('ini files compare', () => {
   expect(genDiff(firstIniConfig, secondIniConfig)).toBe(result);
-});
+}); */
+test('plain format test', () => {
+  expect(gendiff(firstIniConfig, secondIniConfig)).toBe(plainResult);
+})

@@ -1,3 +1,4 @@
 import treeRender from './tree';
+import plainRender from './plain';
 
-export default (data) => treeRender(data);
+export default (data) => plainRender(data);
