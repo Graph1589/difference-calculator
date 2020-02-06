@@ -21,8 +21,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: npm install, build, and test
         run: |
-          make build
           make install
+          npm run build
           make test
         env:
           CI: true
@@ -32,7 +32,7 @@ jobs:
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v2.4.0
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          CC_TEST_REPORTER_ID: 804e6ca2e783da2c335f6e03fe170a7b11551a5ed0113384323bb53a8b1a5eac
         with:
           coverageCommand: make test-coverage
           debug: true
