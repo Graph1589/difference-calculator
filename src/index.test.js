@@ -62,7 +62,7 @@ Property 'group2' was deleted
 Property 'group3' was added with value: [complex value]
 `;
 
-const jsonResult = '[{"name":"group1","type":"key","beforeValue":true,"afterValue":true,"children":[],"status":"unchanged"},{"name":"group2","type":"obj","beforeValue":{"key1":1},"afterValue":{"key1":1},"children":[{"name":"key1","type":"key","beforeValue":1,"afterValue":1,"children":[],"status":"unchanged"}],"status":"unchanged"},{"name":"group3","type":"obj","beforeValue":{"key1":1},"afterValue":{"key1":1,"key2":2},"children":[{"name":"key1","type":"key","beforeValue":1,"afterValue":1,"children":[],"status":"unchanged"},{"name":"key2","type":"key","afterValue":2,"children":[],"status":"added"}],"status":"unchanged"},{"name":"group4","type":"key","beforeValue":"value","children":[],"status":"deleted"}]'
+const jsonResult = '[{"name":"group1","type":"key","beforeValue":true,"afterValue":true,"children":[],"status":"unchanged"},{"name":"group2","type":"obj","beforeValue":{"key1":1},"afterValue":{"key1":1},"children":[{"name":"key1","type":"key","beforeValue":1,"afterValue":1,"children":[],"status":"unchanged"}],"status":"unchanged"},{"name":"group3","type":"obj","beforeValue":{"key1":1},"afterValue":{"key1":1,"key2":2},"children":[{"name":"key1","type":"key","beforeValue":1,"afterValue":1,"children":[],"status":"unchanged"},{"name":"key2","type":"key","afterValue":2,"children":[],"status":"added"}],"status":"unchanged"},{"name":"group4","type":"key","beforeValue":"value","children":[],"status":"deleted"}]';
 
 test('json files compare', () => {
   expect(genDiff(firstJsonConfig, secondJsonConfig)).toBe(treeResult);
