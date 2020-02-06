@@ -47,6 +47,18 @@ const result = `{
     }
 }`;
 
+const plainResult = `Property 'common.follow' was added with value: false
+Property 'common.setting2' was deleted
+Property 'common.setting3' was changed from true to [complex value]
+Property 'common.setting4' was added with value: blah blah
+Property 'common.setting5' was added with value: [complex value]
+Property 'common.setting6.ops' was added with value: vops
+Property 'group1.baz' was changed from bas to bars
+Property 'group1.nest' was changed from [complex value] to str
+Property 'group2' was deleted
+Property 'group3' was added with value: [complex value]
+`;
+
 test('json files compare', () => {
   expect(genDiff(firstJsonConfig, secondJsonConfig)).toBe(result);
 });
@@ -55,4 +67,7 @@ test('yaml files compare', () => {
 });
 test('ini files compare', () => {
   expect(genDiff(firstIniConfig, secondIniConfig)).toBe(result);
+});
+test('plain format test', () => {
+  expect(genDiff(firstIniConfig, secondIniConfig, 'plain')).toBe(plainResult);
 });
