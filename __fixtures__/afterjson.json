@@ -1,0 +1,10 @@
+{
+  "group1": true,
+  "group2": {
+    "key1": 1
+  },
+  "group3": {
+    "key1": 1,
+    "key2": 2
+  }
+}
