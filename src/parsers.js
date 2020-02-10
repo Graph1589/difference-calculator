@@ -4,8 +4,8 @@ import yaml from 'js-yaml';
 import ini from 'ini';
 
 export default (ConfigPath) => {
-  const format = path.extname(ConfigPath);
-  switch (format) {
+  const configFormat = path.extname(ConfigPath);
+  switch (configFormat) {
     case '.json':
       return JSON.parse(fs.readFileSync(ConfigPath));
     case '.yaml':
@@ -13,6 +13,6 @@ export default (ConfigPath) => {
     case '.ini':
       return ini.parse(fs.readFileSync(ConfigPath, 'UTF-8'));
     default:
-      return undefined;
+      throw new Error('unsupported format');
   }
 };
