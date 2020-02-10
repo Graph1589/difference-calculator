@@ -1,13 +1,13 @@
-import treeRender from './tree';
-import plainRender from './plain';
-import jsonRender from './json';
+import renderTree from './tree';
+import renderPlain from './plain';
+import renderJson from './json';
 
-export default (data, format) => {
-  if (format === 'plain') {
-    return plainRender(data);
+export default (difference, outputFormat) => {
+  if (outputFormat === 'plain') {
+    return renderPlain(difference);
   }
-  if (format === 'json') {
-    return jsonRender(data);
+  if (outputFormat === 'json') {
+    return renderJson(difference);
   }
-  return treeRender(data);
+  return renderTree(difference);
 };

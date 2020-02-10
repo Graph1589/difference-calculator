@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const statusCheck = (beforeValue, afterValue) => {
+const SetStatus = (beforeValue, afterValue) => {
   if (beforeValue === undefined) {
     return 'added';
   }
@@ -27,7 +27,7 @@ const genDiff = (firstConfig, secondConfig) => {
   const diff = keys.map((current) => {
     const beforeValue = _.has(firstConfig, current) ? firstConfig[current] : undefined;
     const afterValue = _.has(secondConfig, current) ? secondConfig[current] : undefined;
-    const status = statusCheck(beforeValue, afterValue);
+    const status = SetStatus(beforeValue, afterValue);
     const type = isObjects(firstConfig[current], secondConfig[current]) ? 'obj' : 'key';
     const children = isObjects(firstConfig[current], secondConfig[current])
       ? genDiff(firstConfig[current], secondConfig[current]) : [];
