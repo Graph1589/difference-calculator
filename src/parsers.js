@@ -9,9 +9,9 @@ export default (ConfigPath) => {
     case '.json':
       return JSON.parse(fs.readFileSync(ConfigPath));
     case '.yaml':
-      return yaml.safeLoad(fs.readFileSync(ConfigPath));
+      return yaml.safeLoad(fs.readFileSync(ConfigPath, 'utf-8'));
     case '.ini':
-      return ini.parse(fs.readFileSync(ConfigPath, 'UTF-8'));
+      return ini.parse(fs.readFileSync(ConfigPath, 'utf-8'));
     default:
       throw new Error('unsupported format');
   }

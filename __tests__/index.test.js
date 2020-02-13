@@ -13,26 +13,12 @@ const coll = configTypes.flatMap(
   ),
 );
 
-test.each(coll)('test test', (configType, outputType) => {
+console.log(coll);
+test.each(coll)('test test %', (configType, outputType) => {
+  console.log([configType, outputType]);
+  const beforeConfig = getFixturePath(`before.${configType}`);
+  const afterConfig = getFixturePath(`after.${configType}`);
+  const result = fs.readFileSync(getFixturePath(outputType), 'utf-8');
 
+  expect(genDiff(beforeConfig, afterConfig, outputType)).toEqual(result);
 });
-
-
-/*
-test('json files compare', () => {
-  expect(genDiff(firstJsonConfig, secondJsonConfig)).toBe(fs.readFileSync(getFixturePath('tree'), 'utf-8'));
-});
-
-test('yaml files compare', () => {
-  expect(genDiff(firstYamlConfig, secondYamlConfig)).toBe(fs.readFileSync(getFixturePath('tree'), 'utf-8'));
-});
-test('ini files compare', () => {
-  expect(genDiff(firstIniConfig, secondIniConfig)).toBe(fs.readFileSync(getFixturePath('tree'), 'utf-8'));
-});
-test('plain format test', () => {
-  expect(genDiff(firstIniConfig, secondIniConfig, 'plain')).toBe(fs.readFileSync(getFixturePath('plain'), 'utf-8'));
-});
-test('json format test', () => {
-  expect(genDiff(firstConfugJsonOutput, secondConfigJsonOutput, 'json')).toBe(fs.readFileSync(getFixturePath('json'), 'utf-8'));
-});
-*/
