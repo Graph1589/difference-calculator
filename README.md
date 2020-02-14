@@ -17,5 +17,11 @@
 [![asciicast](https://asciinema.org/a/vb3dOGEGExcjGJkkBRsztqxXI.svg)](https://asciinema.org/a/vb3dOGEGExcjGJkkBRsztqxXI)
 
 
-***JSON tree example***
+***TREE output example***
 [![asciicast](https://asciinema.org/a/MWelByJfBnqYz1scvY3i2kqhV.svg)](https://asciinema.org/a/MWelByJfBnqYz1scvY3i2kqhV)
+
+***PLAIN output example***
+[![asciicast](https://asciinema.org/a/QLJjJgQ33eDFliEM8gyPECezn.svg)](https://asciinema.org/a/QLJjJgQ33eDFliEM8gyPECezn)
+
+***JSON-base struct output example***
+[![asciicast](https://asciinema.org/a/uffd90wLhH0TYegPyxu0rkdtB.svg)](https://asciinema.org/a/uffd90wLhH0TYegPyxu0rkdtB)

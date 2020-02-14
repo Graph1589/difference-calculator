@@ -9,11 +9,13 @@ program
   .arguments('<firstConfig> <secondConfig>')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'output format')
-  .action((firstData, secondData) => {
-    const result = genDiff(firstData, secondData);
+  .action((firstConfigPath, secondConfigPath) => {
+    const result = genDiff(firstConfigPath, secondConfigPath, program.format);
     console.log(result);
     return result;
   });
+
 program.parse(process.argv);
+
 
 export default genDiff;
