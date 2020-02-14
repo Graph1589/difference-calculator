@@ -19,10 +19,9 @@ const SetStatus = (beforeValue, afterValue) => {
 const isObjects = (firstUnit, secondUnit) => firstUnit instanceof Object
   && secondUnit instanceof Object;
 
-
 const genDiff = (firstConfig, secondConfig) => {
   const union = _.merge({}, firstConfig, secondConfig);
-  const keys = Object.keys(union).sort();
+  const keys = Object.keys(union);
 
   const diff = keys.map((current) => {
     const beforeValue = _.has(firstConfig, current) ? firstConfig[current] : undefined;
@@ -41,7 +40,7 @@ const genDiff = (firstConfig, secondConfig) => {
       status,
     };
   });
-  return diff;
+  return diff.sort((a, b) => a.name - b.name);
 };
 
 export default genDiff;

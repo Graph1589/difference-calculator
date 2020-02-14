@@ -13,9 +13,7 @@ const coll = configTypes.flatMap(
   ),
 );
 
-console.log(coll);
 test.each(coll)('test test %', (configType, outputType) => {
-  console.log([configType, outputType]);
   const beforeConfig = getFixturePath(`before.${configType}`);
   const afterConfig = getFixturePath(`after.${configType}`);
   const result = fs.readFileSync(getFixturePath(outputType), 'utf-8');
