@@ -5,12 +5,12 @@ const genPath = (path, name) => {
   return `${path}.${name}`;
 };
 
-const render = (data, path = '') => {
+const render = (data, ancestry = '') => {
   const result = data.map((current) => {
     const {
       name, type, children, status,
     } = current;
-    const newPath = genPath(path, name);
+    const newPath = genPath(ancestry, name);
     if (type === 'obj' && status === 'unchanged') {
       return render(children, newPath);
     }

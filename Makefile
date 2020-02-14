@@ -27,4 +27,4 @@ test:
 	npm run test
 
 plain:
-	gendiff --format plain ./__fixtures__/before.json ./__fixtures__/after.json
+	npx babel-node src/bin/gendiff.js --format plain ./__tests__/__fixtures__/before.json ./__tests__/__fixtures__/after.json
