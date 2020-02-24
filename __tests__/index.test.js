@@ -5,7 +5,7 @@ import genDiff from '../src';
 const getFixturePath = (filename) => path.join(__dirname, './', '__fixtures__', filename);
 
 const configTypes = ['json', 'yaml', 'ini'];
-const outputTypes = ['tree', 'plain', 'json'];
+const outputTypes = ['tree'/* , 'plain', 'json' */];
 
 const coll = configTypes.flatMap(
   (configType) => outputTypes.map(
