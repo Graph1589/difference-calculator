@@ -1,37 +1,32 @@
 import _ from 'lodash';
 
 const stringify = (value, depth) => {
-  const ind = depth * 2;
-  if (!(value instanceof Object)) {
-    return value;
+  const indent = depth * 4 + 2;
+  if (value instanceof Object) {
+    const result = Object.keys(value).map((key) => `${' '.repeat(indent)}${key}: ${value[key]}`);
+    return `{\n${result.join('\n')}\n${' '.repeat(indent - 4)}}`;
   }
-  const result = _.keys(value).map((current) => `\n${' '.repeat(ind + 2)}${current}: ${value[current]}`);
-  return `{${result.join('\n')}\n${' '.repeat(ind < 2 ? ind : ind - 2)}}`;
+  return value;
 };
 
-const selectSignByStatus = {
-  unchanged: ' ',
-  added: '+',
-  deleted: '-',
+const renderStringByType = (element, depth, func) => {
+  const indent = depth * 4;
+  const types = {
+    nested: (obj) => `  ${obj.key}: ${func(obj.value, depth + 1)}`,
+    added: (obj) => `+ ${obj.key}: ${stringify(obj.value, depth + 1)}`,
+    deleted: (obj) => `- ${obj.key}: ${stringify(obj.value, depth + 1)}`,
+    changed: (obj) => `- ${obj.key}: ${stringify(obj.value.beforeValue, depth + 1)}
+    + ${obj.key}: ${stringify(obj.value.afterValue, depth + 1)}`,
+    unchanged: (obj) => `  ${obj.key}: ${stringify(obj.value, depth + 1)}`,
+  };
+
+  return `${' '.repeat(indent)}${types[element.typeName](element)}`;
 };
 
 const render = (data, depth = 0) => {
-  const ind = depth * 2;
-  const result = data.map((current) => {
-    const {
-      name, type, beforeValue, afterValue, children, status,
-    } = current;
-    const value = type === 'key' ? stringify(beforeValue || afterValue, depth + 2) : render(children, depth + 2);
-
-    if (type === 'key' && status === 'edited') {
-      return `${' '.repeat(ind)}${'-'} ${name}: ${stringify(beforeValue, depth + 2)}\n${' '.repeat(ind)}${'+'} ${name}: ${stringify(afterValue, depth + 2)}`;
-    }
-    if (type === 'obj' && status === 'edited') {
-      return `${' '.repeat(ind)}${'-'} ${name}: ${value}\n${' '.repeat(ind)}${'+'} ${name}: ${value}`;
-    }
-    return `${' '.repeat(ind)}${selectSignByStatus[status]} ${name}: ${value}`;
-  });
-  return `{\n${result.join('\n')}\n${' '.repeat(ind < 2 ? ind : ind - 2)}}`;
+  const indent = depth * 4;
+  const result = _.map(data, (element) => `${renderStringByType(element, depth, render)}`);
+  return `{\n${result.join('\n')}\n${' '.repeat(indent > 2 ? indent - 2 : indent)}}`;
 };
 
 export default render;
