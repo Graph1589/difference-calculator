@@ -2,12 +2,10 @@ import renderTree from './tree';
 import renderPlain from './plain';
 import renderJson from './json';
 
-export default (difference, outputFormat) => {
-  if (outputFormat === 'plain') {
-    return renderPlain(difference);
-  }
-  if (outputFormat === 'json') {
-    return renderJson(difference);
-  }
-  return renderTree(difference);
+const formatters = {
+  plain: renderPlain,
+  json: renderJson,
+  tree: renderTree,
 };
+
+export default (difference, outputFormat) => formatters[outputFormat](difference);

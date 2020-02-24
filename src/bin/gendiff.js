@@ -10,7 +10,7 @@ program
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'output format')
   .action((firstConfigPath, secondConfigPath) => {
-    const result = genDiff(firstConfigPath, secondConfigPath, program.format);
+    const result = genDiff(firstConfigPath, secondConfigPath, program.format = 'tree');
     console.log(result);
     return result;
   });
