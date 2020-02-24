@@ -1,34 +1,29 @@
-const genPath = (path, name) => {
-  if (path === '') {
-    return `${name}`;
-  }
-  return `${path}.${name}`;
+import _ from 'lodash';
+
+const genPath = (ancestry, name) => (ancestry === '' ? `${name}` : `${ancestry}.${name}`);
+
+const replaceObjectValue = (value) => (value instanceof Object ? '[complex value]' : `${value}`);
+
+const suitedTypes = {
+  nested: (element, ancestry, func) => func(element.value, ancestry),
+  added: (element, ancestry) => (
+    `Property '${ancestry}' was added with value: ${replaceObjectValue(element.value)}\n`
+  ),
+  deleted: (element, ancestry) => `Property '${ancestry}' was deleted\n`,
+  changed: (element, ancestry) => (
+    `Property '${ancestry}' was changed from ${replaceObjectValue(element.value.beforeValue)} to ${replaceObjectValue(element.value.afterValue)}\n`
+  ),
 };
 
+
 const render = (data, ancestry = '') => {
-  const result = data.map((current) => {
-    const {
-      name, type, children, status,
-    } = current;
-    const newPath = genPath(ancestry, name);
-    if (type === 'obj' && status === 'unchanged') {
-      return render(children, newPath);
-    }
-    const beforeValue = current.beforeValue instanceof Object ? '[complex value]' : current.beforeValue;
-    const afterValue = current.afterValue instanceof Object ? '[complex value]' : current.afterValue;
-    switch (status) {
-      case 'deleted':
-        return `Property '${newPath}' was deleted\n`;
-      case 'added':
-        return `Property '${newPath}' was added with value: ${afterValue}\n`;
-      case 'edited':
-        return `Property '${newPath}' was changed from ${beforeValue} to ${afterValue}\n`;
-      default:
-        break;
-    }
-    return '';
+  const filtered = _.filter(data, (current) => current.typeName !== 'unchanged');
+  const mapped = _.map(filtered, (current) => {
+    const { typeName } = current;
+    const currentPath = genPath(ancestry, current.key);
+    return suitedTypes[typeName](current, currentPath, render);
   });
-  return result.join('');
+  return mapped.join('');
 };
 
 export default render;
