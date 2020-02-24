@@ -47,8 +47,8 @@ const generateDiffTree = (firstConfig, secondConfig) => {
       item.checkup(firstConfig, secondConfig, key)
     ));
     const value = method(firstConfig, secondConfig, key, generateDiffTree);
-    return { name: key, typeName, value };
-  });
+    return { typeName, key, value };
+  }).sort();
 };
 
 export default generateDiffTree;

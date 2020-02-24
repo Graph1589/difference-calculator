@@ -9,7 +9,6 @@ export default (firstConfigPath, secondConfigPath, outputFormat) => {
     parse(fs.readFileSync(firstConfigPath, 'utf-8'), path.extname(firstConfigPath)),
     parse(fs.readFileSync(secondConfigPath, 'utf-8'), path.extname(secondConfigPath)),
   );
-  console.log(diffTree);
   const result = renderDiff(diffTree, outputFormat);
   return result;
 };
