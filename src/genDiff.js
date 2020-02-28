@@ -6,21 +6,24 @@ const types = [
     checkup: (firstUnit, secondUnit, key) => (
       firstUnit[key] instanceof Object && secondUnit[key] instanceof Object
     ),
-    method: (firstUnit, secondUnit, key, handler) => handler(firstUnit[key], secondUnit[key]),
+    method: (firstUnit, secondUnit, key, handle) => {
+      const children = handle(firstUnit[key], secondUnit[key]);
+      return { children };
+    },
   },
   {
     typeName: 'added',
     checkup: (firstUnit, secondUnit, key) => (
       !_.has(firstUnit, key) && _.has(secondUnit, key)
     ),
-    method: (firstUnit, secondUnit, key) => secondUnit[key],
+    method: (firstUnit, secondUnit, key) => ({ value: secondUnit[key] }),
   },
   {
     typeName: 'deleted',
     checkup: (firstUnit, secondUnit, key) => (
       _.has(firstUnit, key) && !_.has(secondUnit, key)
     ),
-    method: (firstUnit, secondUnit, key) => firstUnit[key],
+    method: (firstUnit, secondUnit, key) => ({ value: firstUnit[key] }),
   },
   {
     typeName: 'changed',
@@ -36,7 +39,7 @@ const types = [
     checkup: (firstUnit, secondUnit, key) => (
       (_.has(firstUnit, key) && _.has(secondUnit, key)) && firstUnit[key] === secondUnit[key]
     ),
-    method: (firstUnit, secondUnit, key) => firstUnit[key],
+    method: (firstUnit, secondUnit, key) => ({ value: firstUnit[key] }),
   },
 ];
 
@@ -46,8 +49,8 @@ const generateDiffTree = (firstConfig, secondConfig) => {
     const { typeName, method } = _.find(types, (item) => (
       item.checkup(firstConfig, secondConfig, key)
     ));
-    const value = method(firstConfig, secondConfig, key, generateDiffTree);
-    return { typeName, key, value };
+    const content = method(firstConfig, secondConfig, key, generateDiffTree);
+    return { typeName, key, content };
   }).sort();
 };
 

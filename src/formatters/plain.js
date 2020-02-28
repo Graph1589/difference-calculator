@@ -5,13 +5,13 @@ const genPath = (ancestry, name) => (ancestry === '' ? `${name}` : `${ancestry}.
 const replaceObjectValue = (value) => (value instanceof Object ? '[complex value]' : `${value}`);
 
 const suitedTypes = {
-  nested: (element, ancestry, func) => func(element.value, ancestry),
+  nested: (element, ancestry, handle) => handle(element.content.children, ancestry),
   added: (element, ancestry) => (
-    `Property '${ancestry}' was added with value: ${replaceObjectValue(element.value)}\n`
+    `Property '${ancestry}' was added with value: ${replaceObjectValue(element.content.value)}`
   ),
-  deleted: (element, ancestry) => `Property '${ancestry}' was deleted\n`,
+  deleted: (element, ancestry) => `Property '${ancestry}' was deleted`,
   changed: (element, ancestry) => (
-    `Property '${ancestry}' was changed from ${replaceObjectValue(element.value.beforeValue)} to ${replaceObjectValue(element.value.afterValue)}\n`
+    `Property '${ancestry}' was changed from ${replaceObjectValue(element.content.beforeValue)} to ${replaceObjectValue(element.content.afterValue)}`
   ),
 };
 
@@ -23,7 +23,7 @@ const render = (data, ancestry = '') => {
     const currentPath = genPath(ancestry, current.key);
     return suitedTypes[typeName](current, currentPath, render);
   });
-  return mapped.join('');
+  return mapped.join('\n');
 };
 
 export default render;
