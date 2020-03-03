@@ -1,4 +1,3 @@
-import _ from 'lodash';
 
 const stringify = (value, depth) => {
   if (!(value instanceof Object)) {
@@ -25,7 +24,7 @@ const renderStringByType = (element, depth, func) => {
 
 const render = (data, depth = 0) => {
   const indent = depth * 4;
-  const result = _.map(data, (element) => `${renderStringByType(element, depth, render)}`);
+  const result = data.map((element) => `${renderStringByType(element, depth, render)}`);
   return `{\n${result.join('\n')}\n${' '.repeat(indent > 2 ? indent - 2 : indent)}}`;
 };
 

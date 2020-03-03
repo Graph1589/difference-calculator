@@ -1,4 +1,3 @@
-import _ from 'lodash';
 
 const genPath = (ancestry, name) => (ancestry === '' ? `${name}` : `${ancestry}.${name}`);
 
@@ -17,8 +16,8 @@ const suitedTypes = {
 
 
 const render = (data, ancestry = '') => {
-  const filtered = _.filter(data, (current) => current.typeName !== 'unchanged');
-  const mapped = _.map(filtered, (current) => {
+  const filtered = data.filter((current) => current.typeName !== 'unchanged');
+  const mapped = filtered.map((current) => {
     const { typeName } = current;
     const currentPath = genPath(ancestry, current.key);
     return suitedTypes[typeName](current, currentPath, render);
