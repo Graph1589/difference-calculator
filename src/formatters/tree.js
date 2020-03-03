@@ -9,18 +9,18 @@ const stringify = (value, depth) => {
   return `{\n${result.join('\n')}\n${' '.repeat(indent - 4)}}`;
 };
 
+const types = {
+  nested: (obj, depth, func) => `  ${obj.key}: ${func(obj.content.children, depth + 1)}`,
+  added: (obj, depth) => `+ ${obj.key}: ${stringify(obj.content.value, depth + 1)}`,
+  deleted: (obj, depth) => `- ${obj.key}: ${stringify(obj.content.value, depth + 1)}`,
+  changed: (obj, depth) => `- ${obj.key}: ${stringify(obj.content.beforeValue, depth + 1)}
+    + ${obj.key}: ${stringify(obj.content.afterValue, depth + 1)}`,
+  unchanged: (obj, depth) => `  ${obj.key}: ${stringify(obj.content.value, depth + 1)}`,
+};
+
 const renderStringByType = (element, depth, func) => {
   const indent = depth * 4;
-  const types = {
-    nested: (obj) => `  ${obj.key}: ${func(obj.content.children, depth + 1)}`,
-    added: (obj) => `+ ${obj.key}: ${stringify(obj.content.value, depth + 1)}`,
-    deleted: (obj) => `- ${obj.key}: ${stringify(obj.content.value, depth + 1)}`,
-    changed: (obj) => `- ${obj.key}: ${stringify(obj.content.beforeValue, depth + 1)}
-    + ${obj.key}: ${stringify(obj.content.afterValue, depth + 1)}`,
-    unchanged: (obj) => `  ${obj.key}: ${stringify(obj.content.value, depth + 1)}`,
-  };
-
-  return `${' '.repeat(indent)}${types[element.typeName](element)}`;
+  return `${' '.repeat(indent)}${types[element.typeName](element, depth, func)}`;
 };
 
 const render = (data, depth = 0) => {
