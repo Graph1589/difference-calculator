@@ -13,29 +13,29 @@ gendiff --format [type] FILENAME1 FILENAME2
 ```
 
 ## Format types
-- tree
-- plain
-- json
+- **tree**
+- **plain**
+- **json**
 
 ## Examples
 
-- ***JSON example***
+- **JSON example**
 [![asciicast](https://asciinema.org/a/KrDop8cNoJmZ46D6ej57TDxzQ.svg)](https://asciinema.org/a/KrDop8cNoJmZ46D6ej57TDxzQ)
 
 
-- ***YAML example***
+- **YAML example**
 [![asciicast](https://asciinema.org/a/IR1fLzPSkNZrrgkGrqWQ8lo1Y.svg)](https://asciinema.org/a/IR1fLzPSkNZrrgkGrqWQ8lo1Y)
 
 
-- ***INI example***
+- **INI example**
 [![asciicast](https://asciinema.org/a/vb3dOGEGExcjGJkkBRsztqxXI.svg)](https://asciinema.org/a/vb3dOGEGExcjGJkkBRsztqxXI)
 
 
-- ***TREE output example***
+- **TREE output example**
 [![asciicast](https://asciinema.org/a/MWelByJfBnqYz1scvY3i2kqhV.svg)](https://asciinema.org/a/MWelByJfBnqYz1scvY3i2kqhV)
 
-- ***PLAIN output example***
+- **PLAIN output example**
 [![asciicast](https://asciinema.org/a/QLJjJgQ33eDFliEM8gyPECezn.svg)](https://asciinema.org/a/QLJjJgQ33eDFliEM8gyPECezn)
 
-- ***JSON-base struct output example***
+- **JSON-base struct output example**
 [![asciicast](https://asciinema.org/a/uffd90wLhH0TYegPyxu0rkdtB.svg)](https://asciinema.org/a/uffd90wLhH0TYegPyxu0rkdtB)
